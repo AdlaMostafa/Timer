@@ -23,9 +23,6 @@ body{
     background-color:rgb(246, 246, 250) ;
 }
 .main{
-    /* display: flex;
-    justify-content:center;
-    align-items: center;  */
     min-width: 900px;
     padding: 20px;  
     border-radius: 10px;
@@ -38,52 +35,40 @@ body{
     align-items: center;
     border-bottom: 1px solid black;
   }
-  
-  .Timer,
-  .Stopwatch {
+.Timer,
+.Stopwatch {
     margin: 14px 25px; /* Adjust the desired gap */
     width: 100px;
   }  
-  .Timer {
+.Timer {
     order: 2;
   }
-  
-  .Stopwatch {
+.Stopwatch {
     order: 1;
-  }
-  
-  .header > div {
+  }  
+.header > div {
     margin: 14px 25px; /* Adjust the desired gap */}
-    .header > div:hover{
+.header > div:hover{
         border-bottom: 1px solid black;
     }
-/******************/
-/* .header .Timer{
-    width: 429px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-}
-.header .Stopwatch{ 
-    width: 429px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-}  */
 .header a{
     text-decoration: none;
     font-size: medium;
     color: black;
 }
-/* .header a:hover{
-    border-bottom: 1px solid black;
-} */
 .header img{
  width: 20px; 
  height: 20px;  
 }
 .timeplace{
     padding: 60px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.timeplace .time span{
+    font-weight:bold ;
+    font-size: 40px;
 }
 .icons img{
     width: 20px; 
@@ -95,8 +80,6 @@ body{
     justify-content: space-between;
     border-top:1px solid black ;
 }
-  
-
 .footer .btns{
     display: flex;
 }
