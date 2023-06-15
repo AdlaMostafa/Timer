@@ -1,61 +1,61 @@
-// Timer variables
-let hours = 0;
-let minutes = 0;
-let seconds = 0;
-let timer;
+// Timer functionality
+let timerIntervalId;
+const timerElement = document.querySelector('.time');
+const timeInput = document.getElementById("timeInput");
+const startBtn = document.getElementById("startBtn");
+const stopBtn = document.getElementById("stopBtn");
 
-// DOM elements
-const hoursElement = document.getElementById("hours");
-const minutesElement = document.getElementById("minutes");
-const secondsElement = document.getElementById("seconds");
-const startButton = document.getElementById("start");
-const pauseButton = document.getElementById("pause");
-const resetButton = document.getElementById("reset");
+function startTimer(duration, display) {
+  let timer = duration;
+  let intervalId = setInterval(function () {
+    const hours = parseInt(timer / 3600, 10);
+    const minutes = parseInt((timer % 3600) / 60, 10);
+    const seconds = parseInt(timer % 60, 10);
 
-// Event listeners
-startButton.addEventListener("click", startTimer);
-pauseButton.addEventListener("click", pauseTimer);
-resetButton.addEventListener("click", resetTimer);
+    const formattedTime = formatTime(hours, minutes, seconds);
+    display.innerHTML = formattedTime;
 
-// Timer functions
-function startTimer() {
-  timer = setInterval(updateTimer, 1000);
-  startButton.disabled = true;
+    if (--timer < 0) {
+      clearInterval(intervalId);
+      display.innerHTML = "<span>0s</span>";
+      // Play timer sound here
+      playTimerSound();
+    }
+  }, 1000);
+
+  return intervalId;
 }
 
-function pauseTimer() {
-  clearInterval(timer);
-  startButton.disabled = false;
+function formatTime(hours, minutes, seconds) {
+  const formattedHours = hours < 10 ? "0" + hours : hours;
+  const formattedMinutes = minutes < 10 ? "0" + minutes : minutes;
+  const formattedSeconds = seconds < 10 ? "0" + seconds : seconds;
+  return `<span>${formattedHours}h : ${formattedMinutes}m : ${formattedSeconds}s</span>`;
 }
 
-function resetTimer() {
-  clearInterval(timer);
-  hours = 0;
-  minutes = 0;
-  seconds = 0;
-  updateTimerDisplay();
-  startButton.disabled = false;
-}
+startBtn.addEventListener("click", function () {
+  const timeValue = timeInput.innerText;
+  const timeParts = timeValue.split(" : ");
+  const hours = parseInt(timeParts[0], 10);
+  const minutes = parseInt(timeParts[1], 10);
+  const seconds = parseInt(timeParts[2], 10);
 
-function updateTimer() {
-  seconds++;
-  if (seconds === 60) {
-    seconds = 0;
-    minutes++;
+  if (!isNaN(hours) && !isNaN(minutes) && !isNaN(seconds)) {
+    const duration = hours * 3600 + minutes * 60 + seconds;
+    if (duration > 0) {
+      timerIntervalId = startTimer(duration, timerElement);
+    }
   }
-  if (minutes === 60) {
-    minutes = 0;
-    hours++;
-  }
-  updateTimerDisplay();
-}
+});
 
-function updateTimerDisplay() {
-  hoursElement.textContent = formatTime(hours);
-  minutesElement.textContent = formatTime(minutes);
-  secondsElement.textContent = formatTime(seconds);
-}
+stopBtn.addEventListener("click", function () {
+  clearInterval(timerIntervalId);
+  timerElement.innerHTML = "<span>0s</span>";
+});
 
-function formatTime(time) {
-  return time.toString().padStart(2, "0");
+// Timer sound functionality
+function playTimerSound() {
+  // Play the timer sound here
+  const audio = new Audio("/timer.m3u8");
+  audio.play();
 }
