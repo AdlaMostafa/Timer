@@ -1,15 +1,16 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Timer </title>
+  <title>Timer</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
   <div class="container">
-    <div class="mian">
+    <div class="main">
       <div class="header">
         <div class="Timer">
           <a href="">Timer</a>
@@ -20,8 +21,12 @@
           <img src="images/stopwatch.png" alt="">
         </div>
       </div>
-      <div class="timeplace">
-        <div class="time"></div>
+      <div class="timeplace" contenteditable="true">
+        <div class="time">
+          <span id="timeInput" contenteditable="true">00h : 00m : 00s</span>
+        </div>
+      </div>
+      
       </div>
       <div class="footer">
         <div class="icons">
@@ -35,6 +40,7 @@
       </div>
     </div>
   </div>
+  <script src="test.js"></script>
 </body>
 
 </html>
