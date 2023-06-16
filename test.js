@@ -56,6 +56,6 @@ stopBtn.addEventListener("click", function () {
 // Timer sound functionality
 function playTimerSound() {
   // Play the timer sound here
-  const audio = new Audio("/timer.m3u8");
+  const audio = new Audio("https://youtu.be/TLwhqmf4Td4");
   audio.play();
 }
